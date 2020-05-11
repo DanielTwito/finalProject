@@ -1,0 +1,91 @@
+
+<div ng-controller="homeCont" ng-init="home_init()">
+
+<div class="container"  ng-show="!logged_flag" style="margin-top: 50px; position: center" >
+    <div class="row align-items-center">
+        <div class="col-12 hero-text-image">
+            <div class="row">
+                <div class="col-lg-7 text-center text-lg-left">
+                    <h1 >Welcome Guest!<br>106 Report Center</h1>
+                    <p class="mb-5" >To make a report, please sign in or register</p>
+                    <ul style=" list-style-type: none; display: flex; position: center">
+                        <li ><p style="width : 100px"><a href="#!login" class="btn btn-primary btn-sm">Login</a></p></li>
+                        <li style="padding-left: 55px"><p style="width: 100px" ><a href="#!register" class="btn btn-primary btn-sm">Register</a></p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container"  ng-show="logged_flag" style="margin-top: 50px; position: center"  >
+    <div class="row align-items-center">
+        <div class="col-12 hero-text-image">
+            <div class="row">
+                <div class="col-lg-7 text-center text-lg-left">
+                    <h1 ng-init="text_show=true" ng-show="text_show" >Welcome {{logUser}}</h1>
+                    <p class="mb-5" ng-init="text_show=true" ng-show="text_show">Take a photo from your Camera or from your gallery </p>
+                    <ul style=" list-style-type: none; display: flex; position: center">
+                        <li  id="photo_flag"  ng-click="choose_source()" ><p style="width : 100px; padding-left: 90px"><a  class="btn btn-primary btn-sm">Take a Photo</a></p></li>
+<!--                        <li  ng-click="test()" ><p style="width : 100px; padding-left: 90px"><a  class="btn btn-primary btn-sm">Take a Photo</a></p></li>-->
+<!--                        <li  ng-click="cameraTakePicture_gallery()" ><p style="width : 100px; padding-left: 90px"><a  class="btn btn-primary btn-sm">From gallery</a></p></li>-->
+                    </ul>
+                    <!--                    <button ng-click="choose_source()">Location</button>-->
+                    <p style="color: black" id="a"></p>
+                    <p style="color: black" id="b"></p>
+
+                    <div class="row step"  id="addform"  style="display :none ;width: 95%; margin: 0 auto; padding: 0; box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.1);" >
+                        <div class="col">
+                            <div class="col-md-6 mb-5 mb-md-0"  >
+                                <form class="php-email-form">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12 ">
+                                            <input  ng-click="click1()"  id = "class1"  type="submit" class="btn btn-primary d-block w-100 " ng-model="class1"
+                                            style=" background: white;
+                                            border: 2px solid black;
+                                            color:black !important;
+                                            font-weight: bold;">
+                                            <input ng-click="click2()"  id = "class2" type="submit" class="btn btn-primary d-block w-100 " ng-model="class2"
+                                                   style=" background: white;
+                                            border: 2px solid black;
+                                            color:black !important;
+                                            font-weight: bold;">
+                                            <input ng-click="click3()"  id = "class3" type="submit" class="btn btn-primary d-block w-100 " ng-model="class3"
+                                                   style=" background: white;
+                                            border: 2px solid black;
+                                            color:black !important;
+                                            font-weight: bold;">
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <img id = "myImage" >
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <h4 >Description(optional)</h4>
+                                            <input type="text" class="form-control"  ng-model="p_description" />
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <input ng-click="addReport()" type="submit" class="btn btn-primary d-block w-100" value="Send">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>

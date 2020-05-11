@@ -1,0 +1,88 @@
+<div class="site-section" ng-controller="regCont" ng-init="init()">
+    <div class="container">
+        <div class="row mb-5 align-items-end">
+            <div class="col-md-6">
+
+                <h2>Register</h2>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-5 mb-md-0"  >
+                <form class="php-email-form">
+
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label >Username</label>
+                            <input type="text" class="form-control" id="username" ng-model="username" />
+                            <p ng-show="valid_username" style="color: red">*Please enter at least 4 chars</p>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label >Email</label>
+                            <input type="text" class="form-control" ng-model="u_email" />
+                            <p ng-show="valid_email" style="color: red">*Please enter at valid email</p>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Password</label>
+                            <input type="password"  class="form-control" id="password" ng-model="password" value=""/>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label >Verified Password</label>
+                            <input type="password" class="form-control" name="v_password" id="v_password" ng-model="v_password" value=""/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <p ng-show="valid_password" style="color: red">*Passwords must match</p>
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label >First Name</label>
+                            <input type="text" class="form-control" ng-model="first_name" value=""/>
+                            <p ng-show="valid_fname" style="color: red">*cant be empty  / must contain only letters</p>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label >Last Name</label>
+                            <input type="text" class="form-control" ng-model="last_name" value=""/>
+                            <p ng-show="valid_lname" style="color: red">*cant be empty  / must contain only letters</p>
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label >City</label>
+                            <input type="text" class="form-control" ng-model="city" value=""/>
+                            <p ng-show="valid_city" style="color: red">*cant be empty  / must contain only letters</p>
+
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label >neighborhood</label>
+                            <input type="text"  class="form-control" ng-model="neighborhood" value=""/>
+                            <p ng-show="valid_neighborhood" style="color: red">*cant be empty</p>
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label >Street</label>
+                            <input type="text" class="form-control" ng-model="street" value=""/>
+                            <p ng-show="valid_street" style="color: red">*cant be empty</p>
+
+                        </div>
+
+<!--                        <div class="col-md-12 mb-3">-->
+<!--                            <div class="loading">Loading</div>-->
+<!--                            <div class="error-message"></div>-->
+<!--                            <div class="sent-message">Your message has been sent. Thank you!</div>-->
+<!--                        </div>-->
+                        <div class="col-md-12 form-group">
+                            <input ng-click="submit_handler()" type="submit" class="btn btn-primary d-block w-100" value="Register">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

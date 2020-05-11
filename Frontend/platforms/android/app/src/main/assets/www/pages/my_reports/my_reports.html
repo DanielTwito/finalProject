@@ -1,0 +1,40 @@
+
+
+
+
+<div  ng-controller="reportCtrl">
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5 align-items-end">
+            <div class="col-md-6">
+
+                <h2>Previous Reports</h2>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="col-md-6" ng-show="!show_div" >
+                <div class="step">
+                    <h4 style="alignment: left">No Report History </h4>
+                </div>
+
+            </div>
+
+            <div class="col-md-6" ng-show="show_div" ng-repeat="photo in photo_list">
+                <div class="step">
+                    <h4 style="alignment: left">Report Id : {{photo.reportId}} </h4>
+                    <h4 style="alignment: left">Classification : {{photo.class}} </h4>
+                    <h4 style="alignment: left">Discreption:</h4>
+                    <p>{{photo.description}}</p>
+                    <img ng-init="img_src = getsrc(photo.img)" src = {{img_src}} width="250" height="250" style="
+                                 margin-left: auto;
+                                 margin-right: auto;
+                                 display: block;">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
