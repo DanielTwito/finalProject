@@ -1,6 +1,6 @@
 app.controller('regCont', function($rootScope,$scope,$http,$location) {
 
-
+    //initialize boolean variables for error messages
     $scope.init=function () {
         $scope.valid_username=false;
         $scope.valid_password=false;
@@ -10,11 +10,8 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
         $scope.valid_street=false;
         $scope.valid_email=false;
         $scope.valid_city=false;
-
-
-
-
     };
+    //check if the passwords match in password and verified password fields
     $scope.isMatch = function (password, v_password) {
         if (password === undefined || v_password===undefined)
             return false;
@@ -22,7 +19,11 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
 
     };
 
-
+    /**
+     * check if string include only characters including spaces
+     * @param string - given string
+     * @returns {boolean}
+     */
     $scope.includeOnlyCharsWithSpaces=function(string){
         let ans =false;
         if(string === undefined)
@@ -32,6 +33,11 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
         ans =patt.test(string);
         return ans;
     };
+    /**
+     * check if string include only characters without spaces
+     * @param string - given string
+     * @returns {boolean}
+     */
     $scope.includeOnlyChars=function(string){
         let ans = false;
         if(string === undefined)
@@ -40,6 +46,11 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
         ans = patt.test(string);
         return ans;
     };
+    /**
+     * check if string include only characters and numbers without spaces
+     * @param string - given string
+     * @returns {boolean}
+     */
     $scope.isUserNameValid=function(string){
         let ans = false;
         if(string === undefined)
@@ -49,7 +60,9 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
         return ans;
     };
 
-
+    /**
+     * submit handler verified all the field in the registration form
+     */
     $scope.submit_handler=function () {
         $scope.init();
         let user = $scope.username;
@@ -75,11 +88,18 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
         if ( validation_form ){
             $scope.send_request()
         }
-
-
-
     };
-
+    /**
+     * send a post request to the server using REST API with the following:
+     *  userName
+     *  password
+     *  firstName
+     *  lastName
+     *  city
+     *  neighborhood
+     *  street
+     *  email
+     */
     $scope.send_request=function(){
         var req = {
             method: 'POST',
@@ -98,9 +118,9 @@ app.controller('regCont', function($rootScope,$scope,$http,$location) {
 
         $http.post(req.url, JSON.stringify(req.data)).then((res) => {
                navigator.notification.confirm(
-                   'Your detail has been save in our system',  // message
+                   'Your details have been saved in our system',  // message
                    undefined,        // callback
-                   'Registration Success!',            // title
+                   'Registration completed successfully',            // title
                    ['Continue to login page'],
                    undefined// buttonName
                );

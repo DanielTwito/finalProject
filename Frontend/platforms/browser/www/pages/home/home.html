@@ -6,8 +6,8 @@
         <div class="col-12 hero-text-image">
             <div class="row">
                 <div class="col-lg-7 text-center text-lg-left">
-                    <h1 >Welcome Guest!<br>106 Report Center</h1>
-                    <p class="mb-5" >To make a report, please sign in or register</p>
+                    <h1 >Welcome Guest <br></h1>
+                    <p class="mb-5" style="margin-top: 1em;" ><br>To make a report, please sign in or register</p>
                     <ul style=" list-style-type: none; display: flex; position: center">
                         <li ><p style="width : 100px"><a href="#!login" class="btn btn-primary btn-sm">Login</a></p></li>
                         <li style="padding-left: 55px"><p style="width: 100px" ><a href="#!register" class="btn btn-primary btn-sm">Register</a></p></li>
@@ -25,9 +25,10 @@
             <div class="row">
                 <div class="col-lg-7 text-center text-lg-left">
                     <h1 ng-init="text_show=true" ng-show="text_show" >Welcome {{logUser}}</h1>
-                    <p class="mb-5" ng-init="text_show=true" ng-show="text_show">Take a photo from your Camera or from your gallery </p>
+<!--                    <p class="mb-5" ng-init="text_show=true" ng-show="text_show">Take a photo from your Camera or from your gallery </p>-->
+                    <br>
                     <ul style=" list-style-type: none; display: flex; position: center">
-                        <li  id="photo_flag"  ng-click="choose_source()" ><p style="width : 100px; padding-left: 90px"><a  class="btn btn-primary btn-sm">Take a Photo</a></p></li>
+                        <li  id="photo_flag"  ng-click="choose_source()" ><p class=" btn-circle btn-xl" style="width : 100px; padding-left: 90px;"><a  class="btn btn-primary btn-xl" style="border-radius: 50%;">Take a Photo</a></p></li>
 <!--                        <li  ng-click="test()" ><p style="width : 100px; padding-left: 90px"><a  class="btn btn-primary btn-sm">Take a Photo</a></p></li>-->
 <!--                        <li  ng-click="cameraTakePicture_gallery()" ><p style="width : 100px; padding-left: 90px"><a  class="btn btn-primary btn-sm">From gallery</a></p></li>-->
                     </ul>
@@ -85,6 +86,7 @@
     </div>
 </div>
 
+    <div ng-init="text_show=true" ng-show="text_show" style="width: 100%"><iframe width="100%" height="350" src="https://maps.google.com/maps?width=100%&amp;height=350&amp;hl=en&amp;q=%D7%91%D7%90%D7%A8%20%D7%A9%D7%94%D7%A2+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/draw-radius-circle-map/">Google Maps Radius</a></iframe></div><br />
 
 
 

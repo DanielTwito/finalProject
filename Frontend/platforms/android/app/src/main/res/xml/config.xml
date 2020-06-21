@@ -21,6 +21,9 @@
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
+    </feature>
     <name>CordovaApp</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

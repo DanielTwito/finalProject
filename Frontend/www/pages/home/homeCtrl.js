@@ -1,5 +1,8 @@
 
 app.controller('homeCont', function($rootScope,$scope,$http,$location) {
+    /**
+     * init variables when home screen load
+     */
     $scope.home_init = function(){
         if ( localStorage.getItem("token") === null){
             return;
@@ -12,27 +15,12 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
 
     };
 
-    $scope.test=function() {
-        $rootScope.currentReport.imgURI = "img/person_1.jpg";
-        image.style.height = "400px";
-        image.style.width = "300px";
-        $rootScope.currentReport.class = $scope.getClassification();
-        //get location of the given photo
 
-        $scope.getPosition();
-
-        setTimeout(() => {
-            // $rootScope.currentReport.show  =  true;
-            $rootScope.currentReport.lan = $scope.a;
-            $rootScope.currentReport.lon = $scope.b;
-            document.getElementById("addform").style.display = 'block';
-            // alert(JSON.stringify($rootScope.currentReport));
-        }, 3000);
-
-
-    };
 
     //this function take a photo from camera ( work only in phonegap)
+    /**
+     * handler for taken picture from device camera
+     */
     $scope.cameraTakePicture = function() {
         navigator.camera.getPicture(onSuccess, onFail, {
             quality: 75,
@@ -41,7 +29,7 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             sourceType: Camera.PictureSourceType.CAMERA,
             correctOrientation:true
         });
-
+        // Success callback
         function onSuccess(imageData) {
             var image = document.getElementById('myImage');
             // image.src = "data:image/jpeg;base64," + imageData;
@@ -55,7 +43,7 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             document.getElementById("photo_flag").style.display='none';
             $rootScope.currentReport.class =  $scope.getClassification();
 
-            //get location of the given photo
+            //get geo location
             $scope.getPosition();
             // $rootScope.currentReport.show  =  true;
             setTimeout(()=>{
@@ -64,13 +52,15 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
 
             },1000);
         }
-
+        // Fail callback
         function onFail(message) {
             alert('Failed because: ' + message);
         }
     };
 
-
+    /**
+     * handler for taken picture from device gallery
+     */
     $scope.cameraTakePicture_fromGallery = function() {
         navigator.camera.getPicture(onSuccess, onFail, {
             quality: 75,
@@ -79,7 +69,7 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             encodingType: Camera.EncodingType.JPEG,
             correctOrientation:true
         });
-
+        // Success callback
         function onSuccess(imageData) {
             var image = document.getElementById('myImage');
             image.src = imageData;
@@ -88,8 +78,7 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             image.style.width="300px";
             document.getElementById("photo_flag").style.display='none';
             $rootScope.currentReport.class =  $scope.getClassification();
-            //get location of the given photo
-
+            //get geo location
             $scope.getPosition();
 
             setTimeout(()=>{
@@ -97,11 +86,15 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             },1000  );
 
         }
-
+        // Fail callback
         function onFail(message) {
             alert('Failed because: ' + message);
         }
     };
+    /**
+     * get classification for given photo that inside the rootScope
+     * using REST API call to  DL server
+     */
     $scope.getClassification = function(){
         let imageData = $rootScope.currentReport.imgURI;
         var url = encodeURI(SERVER_URL +"/model_predict");
@@ -123,23 +116,40 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
         }, (err)=>{alert(JSON.stringify(err))}, options);
 
     };
+
+    /**
+     * handler to get geo location from GPS inside the device
+     */
     $scope.getPosition = function(){
         navigator.geolocation.getCurrentPosition(onSuccess, onError, {
             enableHighAccuracy: true,
             timeout: 3000,
             maximumAge: 3000
         });
-
+        // Success callback
         function onSuccess(position) {
             $rootScope.currentReport.lan  =  position.coords.latitude+"";
             $rootScope.currentReport.lon  =  position.coords.longitude+"";
         }
-
+        // Error callback
         function onError(error) {
+            if(error.code ===3){
+                navigator.notification.confirm(
+                    'Check the location is activated',  // message
+                    undefined,        // callback
+                    'Activate location',
+                    ['close'],
+                    undefined
+                );
+            }
             alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
         }
     };
 
+    /**
+     * activate the relevant handler base index given
+     * @param index
+     */
     $scope.one =function(index) {
         if(index === 1 )
             $scope.cameraTakePicture();
@@ -147,6 +157,9 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             $scope.cameraTakePicture_fromGallery();
     };
 
+    /**
+     * pop up alert to choose between photo sources camera/gallery from the device
+     */
     $scope.choose_source=function(){
         $scope.text_show = false;
         navigator.notification.confirm(
@@ -157,9 +170,16 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             undefined// buttonName
         );
     };
-
+    /**
+     * upload the report to the server
+     * with the following parameters:
+     * the photo
+     * date
+     * geo location
+     * description
+     * photo classification
+     */
     $scope.addReport = function () {
-        let photo_disc = $scope.photo_description;
         let imageData = $rootScope.currentReport.imgURI;
         var url = encodeURI(SERVER_URL +"/addReport");
         var options = new FileUploadOptions();
@@ -175,11 +195,13 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
         var ft = new FileTransfer();
         // ft.upload(imageData, url, (res)=> alert(JSON.stringify(res.response)), (err)=>{alert(JSON.stringify(err))}, options);
         var params = {};
+        var date = new Date();
+        var curr_date = date.getUTCDate()+"/"+(date.getUTCMonth()+1)+"/"+date.getUTCFullYear();
         params.latitude = $rootScope.currentReport.lan;
         // params.latitude = 10;
         params.longitude =  $rootScope.currentReport.lon;
         // params.longitude = 55;
-        params.date = Date.now();
+        params.date = curr_date;
         params.class = $rootScope.currentReport.choosen_class;
         params.description = $scope.p_description;
         // alert(JSON.stringify(params));
@@ -197,13 +219,14 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
             );
             $location.path('/home');
             }, (err)=>{alert(JSON.stringify(err))}, options);
-        // alert($scope.photo_description);
 
 
     };
+    /**
+     * marking the best classification for a photo
+     */
     $scope.init_class_selection = function(){
         $rootScope.currentReport.choosen_class = $rootScope.currentReport.class[0];
-        // alert($rootScope.currentReport.class);
         let x = $rootScope.currentReport.class;
         document.getElementById("class1").style.background = "rgba(0,0,0,0.2)";
         document.getElementById("class1").value = x[0]+"";
@@ -212,6 +235,7 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
         document.getElementById("class3").style.background = "white";
         document.getElementById("class3").value= x[2]+"";
     };
+    //handler for user to change the default classification
     $scope.click1 = function(){
         $rootScope.currentReport.choosen_class = document.getElementById("class1").value;
         document.getElementById("class2").style.background = "white";
@@ -219,7 +243,7 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
         document.getElementById("class3").style.background = "white";
     };
 
-
+    //handler for user to change the default classification
     $scope.click2=function(){
         $rootScope.currentReport.choosen_class = document.getElementById("class2").value;
         document.getElementById("class1").style.background = "white";
@@ -227,16 +251,13 @@ app.controller('homeCont', function($rootScope,$scope,$http,$location) {
         document.getElementById("class2").style.background = "rgba(0,0,0,0.2)";
     };
 
-
+    //handler for user to change the default classification
     $scope.click3=function(){
         $rootScope.currentReport.choosen_class = document.getElementById("class3").value;
         document.getElementById("class1").style.background = "white";
         document.getElementById("class2").style.background = "white";
         document.getElementById("class3").style.background = "rgba(0,0,0,0.2)";
     };
-
-
-
 
 
 });

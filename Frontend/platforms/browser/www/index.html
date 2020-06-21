@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SoftLand Bootstrap Template</title>
+    <title>Cindicator</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -57,7 +57,7 @@
             <div class="row align-items-center">
 
                 <div class="col-6 col-lg-2">
-                    <h1 class="mb-0 site-logo"><a href="#!home" class="mb-0">106 Report</a></h1>
+                    <h1 class="mb-0 site-logo"><a href="#!home" class="mb-0">Cindicator</a></h1>
                 </div>
 
                 <div class="col-12 col-md-10 d-none d-lg-block">
@@ -69,6 +69,7 @@
 <!--                            <li><a href="#!login" class="nav-link">Login</a></li>-->
 
                             <li><a href="#!my_reports" ng-show="logged_flag" class="nav-link">My Reports</a></li>
+                            <li><a href="#!nearby_reports" ng-show="logged_flag" class="nav-link">Near By Reports</a></li>
                             <li><a ng-show="logged_flag" class="nav-link" style="color: red;" ng-click="signOut()">Sign Out</a></li>
                         </ul>
                     </nav>
@@ -114,7 +115,6 @@
 
 </div> <!-- .site-wrap -->
 
-<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -139,6 +139,7 @@
 <script type="text/javascript" src="pages/login/loginCont.js"></script>
 <script type="text/javascript" src="pages/add_report/addReportCont.js"></script>
 <script type="text/javascript" src="pages/my_reports/reportCtrl.js"></script>
+<script type="text/javascript" src="pages/nearby_reports/nearbyCtrl.js"></script>
 <script src="cordova.js"></script>
 
 

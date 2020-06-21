@@ -47,6 +47,10 @@ app.config(function($routeProvider)  {
         .when('/my_reports', {
             templateUrl: 'pages/my_reports/my_reports.html',
         })
+        .when('/nearby_reports', {
+            // this is a template
+            templateUrl: 'pages/nearby_reports/nearby_reports.html'
+        })
         // other
         .otherwise({ redirectTo: '/' });
 });

@@ -1,18 +1,29 @@
 app.controller('loginCont', function($rootScope,$scope,$http,$location) {
 
-
+    /**
+     *login handler take the values from the inputs
+     */
     $scope.login_handler = function () {
         let username = $scope.login_username;
         let password = $scope.login_password;
         if(username!=="" && password !=="") {
             $scope.login(username, password);
         }else{
-            alert("you must fill username and password");
+            navigator.notification.confirm(
+                'Incorrect user name or password',  // message
+                undefined,        // callback
+                'Login failed',
+                ['Try again'],
+                undefined
+            );
         }
 };
-
+    /**
+     * make a post request to the server using REST API to login
+     * @param uname - user name
+     * @param password - password
+         */
     $scope.login = function (uname,password) {
-
             var req = {
                 method: 'POST',
                 url: SERVER_URL +'/login',
@@ -31,7 +42,13 @@ app.controller('loginCont', function($rootScope,$scope,$http,$location) {
                 $location.path('/home');
 
             }).catch((res)=>{
-                alert(res.data);
+                navigator.notification.confirm(
+                    'Incorrect user name or password',  // message
+                    undefined,        // callback
+                    'Login failed',
+                    ['Try again'],
+                    undefined
+                );
             });
 
         }

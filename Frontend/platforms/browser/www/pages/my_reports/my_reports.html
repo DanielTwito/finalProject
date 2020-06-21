@@ -5,7 +5,7 @@
 <div  ng-controller="reportCtrl">
 <div class="site-section">
     <div class="container">
-        <div class="row mb-5 align-items-end">
+        <div class="row mb-5 align-items-end" style="margin-bottom: 0rem!important;">
             <div class="col-md-6">
 
                 <h2>Previous Reports</h2>
@@ -22,10 +22,11 @@
 
             <div class="col-md-6" ng-show="show_div" ng-repeat="photo in photo_list">
                 <div class="step">
-                    <h4 style="alignment: left">Report Id : {{photo.reportId}} </h4>
-                    <h4 style="alignment: left">Classification : {{photo.class}} </h4>
-                    <h4 style="alignment: left">Discreption:</h4>
-                    <p>{{photo.description}}</p>
+                    <h4 style="alignment: left">Report Id :<h6> {{photo.reportId}}</h6> </h4>
+                    <h4 style="alignment: left">Report date :<h6> {{photo.date}}</h6> </h4>
+                    <h4 style="alignment: left">Classification : <h6>{{photo.class}}</h6> </h4>
+                    <h4 style="alignment: left">Discreption:
+                        <h6>{{photo.description}}</h6></h4>
                     <img ng-init="img_src = getsrc(photo.img)" src = {{img_src}} width="250" height="250" style="
                                  margin-left: auto;
                                  margin-right: auto;
@@ -37,4 +38,7 @@
         </div>
     </div>
 </div>
+
+<!--    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>-->
+
 </div>
