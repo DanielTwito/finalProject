@@ -12,7 +12,7 @@
     "express-formidable": "^1.2.0",
     "formidable": "^1.2.2",
     "jest": "^26.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.2",
     "tedious-connection-pool": "^1.0.5"
   },
